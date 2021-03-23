@@ -5,7 +5,7 @@ function Ticket({ ticket, hideHandler }) {
     <li className="ticket">
       <button
         className="hideTicketButton"
-        onClick={() => hideHandler(ticket._id)}
+        onClick={() => hideHandler(ticket.id)}
       >
         hide
       </button>

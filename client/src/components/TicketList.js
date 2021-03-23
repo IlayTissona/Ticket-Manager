@@ -40,7 +40,7 @@ function TicketList(props) {
       />
       <ul className="ticket-list">
         {list
-          .filter((ticket) => !hiddenTickets.includes(ticket._id))
+          .filter((ticket) => !hiddenTickets.includes(ticket.id))
           .map((ticketObj) => {
             return <Ticket ticket={ticketObj} hideHandler={hideTicket} />;
           })}
