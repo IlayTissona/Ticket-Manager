@@ -8,10 +8,17 @@ function TicketList(props) {
 
   const search = (value) => {
     axios
-      .get(`/api/tickets${value ? "?searchText=" + value : ""}`)
+      .get(`/api/tickets${value === "" ? "?searchText=" + value : ""}`)
       .then((res) => {
         setList(res.data);
       });
+  };
+
+  const hideTicket = (ticketId) => {
+    const newList = list.slice();
+    const ticketToHide = newList.findIndex((val) => val._id === ticketId);
+    newList[ticketToHide].hidden = true;
+    setList(newList);
   };
 
   useEffect(() => {
@@ -22,12 +29,12 @@ function TicketList(props) {
 
   return (
     <>
-      <SearchArea changeHandler={search} />
+      <SearchArea changeHandler={search} list={list} />
       <ul className="ticket-list">
         {list
           .filter((ticket) => !ticket.hidden)
           .map((ticketObj) => {
-            return <Ticket ticket={ticketObj} />;
+            return <Ticket ticket={ticketObj} hideHandler={hideTicket} />;
           })}
       </ul>
     </>
