@@ -9,6 +9,19 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/tickets", (req, res) => {
-  Ticket.find({}).then((result) => res.json(result));
+  if (req.query.searchText) {
+    const { searchText } = req.query;
+    console.log(searchText);
+    Ticket.find({}).then((allTickets) => {
+      const titlesIncludingSearch = allTickets.filter((ticket) => {
+        const lowerCasedTitle = ticket.title.toLowerCase();
+        const lowerCasedSearch = searchText.toLowerCase();
+        return lowerCasedTitle.includes(lowerCasedSearch);
+      });
+      res.json(titlesIncludingSearch);
+    });
+  } else {
+    Ticket.find({}).then((allTickets) => res.json(allTickets));
+  }
 });
 module.exports = app;
