@@ -32,6 +32,7 @@ function TicketList(props) {
 
   return (
     <>
+      <h1 id="page-title">Ticket Manager</h1>
       <SearchArea
         changeHandler={search}
         restoreHandler={restoreHiddenTickets}

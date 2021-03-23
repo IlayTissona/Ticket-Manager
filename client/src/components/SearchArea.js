@@ -10,11 +10,11 @@ function SearchArea({ changeHandler, restoreHandler, list, hiddenList }) {
           Restore
         </button>
       </span>
-
       <input
         id="searchInput"
         type="text"
         onChange={(e) => changeHandler(e.target.value)}
+        placeholder="Filter: Type ticket's title\part of it"
       ></input>
     </div>
   );
