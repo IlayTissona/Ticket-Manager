@@ -12,16 +12,20 @@ app.get("/api/tickets", (req, res) => {
   if (req.query.searchText) {
     const { searchText } = req.query;
     console.log(searchText);
-    Ticket.find({}).then((allTickets) => {
-      const titlesIncludingSearch = allTickets.filter((ticket) => {
-        const lowerCasedTitle = ticket.title.toLowerCase();
-        const lowerCasedSearch = searchText.toLowerCase();
-        return lowerCasedTitle.includes(lowerCasedSearch);
-      });
-      res.json(titlesIncludingSearch);
-    });
+    Ticket.find({})
+      .then((allTickets) => {
+        const titlesIncludingSearch = allTickets.filter((ticket) => {
+          const lowerCasedTitle = ticket.title.toLowerCase();
+          const lowerCasedSearch = searchText.toLowerCase();
+          return lowerCasedTitle.includes(lowerCasedSearch);
+        });
+        res.json(titlesIncludingSearch);
+      })
+      .catch(() => res.status(500).send("Internal Server Error"));
   } else {
-    Ticket.find({}).then((allTickets) => res.json(allTickets));
+    Ticket.find({})
+      .then((allTickets) => res.json(allTickets))
+      .catch(() => res.status(500).send("Internal Server Error"));
   }
 });
 
