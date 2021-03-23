@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
 const Ticket = require("./seedDB");
+const cors = require("cors");
 
 app.use(express.static("client/build"));
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.sendFile(process.cwd() + "client/build/index.html");

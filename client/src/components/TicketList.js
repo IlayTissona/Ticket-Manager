@@ -6,9 +6,9 @@ function TicketList(props) {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/tickets").then((res) => {
+    axios.get("/api/tickets").then((res) => {
+      console.log("RES DATA!!!!!!!!!!!!!RESDATA!!!!!!!!!!!!", res);
       setList(res.data);
-      console.log(res);
     });
   }, []);
 
