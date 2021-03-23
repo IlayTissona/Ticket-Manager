@@ -24,4 +24,34 @@ app.get("/api/tickets", (req, res) => {
     Ticket.find({}).then((allTickets) => res.json(allTickets));
   }
 });
+
+app.patch("/api/tickets/:ticketId/:action", (req, res) => {
+  const { ticketId } = req.params;
+  if (!ticketId)
+    return res
+      .status(400)
+      .json({ updated: false, message: "No ticket id specified" });
+  const { action } = req.params;
+  if (!action)
+    return res.status(300).json({ updated: false, message: "No action" });
+  if (action !== "done" && action !== "undone") {
+    return res
+      .status(400)
+      .json({ updated: false, message: "Action not allowed" });
+  }
+  const isDone = action === "done";
+
+  Ticket.findByIdAndUpdate(ticketId, { done: isDone }, { new: true })
+    .then((updatedTicked) => {
+      if (!updatedTicked) {
+        return res
+          .status(500)
+          .json({ updated: false, message: "Internal Server Error" });
+      }
+      res.json({ updated: true });
+    })
+    .catch((e) => {
+      res.status(404).json({ updated: false, message: "Not Found" });
+    });
+});
 module.exports = app;

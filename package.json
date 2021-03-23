@@ -7,7 +7,7 @@
     "seed": "node seedDB.js",
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "test": "node_modules/.bin/jest --verbose",
+    "test": "C:/Users/ilay2/OneDrive/Documents/GitHub/Ticket-Manager/node_modules/.bin/jest --verbose",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@suvelocity/tester": "^1.0.2",
-    "jest": "26.6.0",
+    "jest": "^26.6.0",
     "mongo-seeding": "^3.6.0",
     "mongodb": "^3.6.5",
     "nodemon": "^2.0.7",
