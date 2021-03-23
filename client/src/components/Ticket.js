@@ -7,7 +7,7 @@ function Ticket({ ticket, hideHandler }) {
         className="hideTicketButton"
         onClick={() => hideHandler(ticket._id)}
       >
-        {"hide" + ticket._id}
+        hide
       </button>
       <h4 className="ticket-title">{ticket.title}</h4>
       <div className="ticket-content">{ticket.content}</div>

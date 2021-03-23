@@ -5,20 +5,23 @@ import Ticket from "./Ticket";
 
 function TicketList(props) {
   const [list, setList] = useState([]);
+  const [hiddenTickets, setHidden] = useState([]);
 
   const search = (value) => {
     axios
-      .get(`/api/tickets${value === "" ? "?searchText=" + value : ""}`)
+      .get(`/api/tickets${value !== "" ? "?searchText=" + value : ""}`)
       .then((res) => {
         setList(res.data);
       });
   };
 
   const hideTicket = (ticketId) => {
-    const newList = list.slice();
-    const ticketToHide = newList.findIndex((val) => val._id === ticketId);
-    newList[ticketToHide].hidden = true;
-    setList(newList);
+    const newHiddenList = hiddenTickets.concat([ticketId]);
+    setHidden(newHiddenList);
+  };
+
+  const restoreHiddenTickets = () => {
+    setHidden([]);
   };
 
   useEffect(() => {
@@ -29,10 +32,15 @@ function TicketList(props) {
 
   return (
     <>
-      <SearchArea changeHandler={search} list={list} />
+      <SearchArea
+        changeHandler={search}
+        restoreHandler={restoreHiddenTickets}
+        list={list}
+        hiddenList={hiddenTickets}
+      />
       <ul className="ticket-list">
         {list
-          .filter((ticket) => !ticket.hidden)
+          .filter((ticket) => !hiddenTickets.includes(ticket._id))
           .map((ticketObj) => {
             return <Ticket ticket={ticketObj} hideHandler={hideTicket} />;
           })}

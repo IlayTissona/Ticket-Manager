@@ -13,7 +13,6 @@ app.get("/", (req, res) => {
 app.get("/api/tickets", (req, res) => {
   if (req.query.searchText) {
     const { searchText } = req.query;
-    console.log(searchText);
     Ticket.find({})
       .then((allTickets) => {
         const titlesIncludingSearch = allTickets.filter((ticket) => {

@@ -1,19 +1,16 @@
 import React from "react";
 
-function SearchArea({ changeHandler, list }) {
+function SearchArea({ changeHandler, restoreHandler, list, hiddenList }) {
   return (
     <div className="search-area">
-      showing{" "}
-      {list.reduce((prev, val) => {
-        if (!val.hidden) return prev + 1;
-        return prev;
-      }, 0)}{" "}
-      results. (<span id="hideTicketsCounter"></span>
-      {list.reduce((prev, val) => {
-        if (val.hidden) return prev + 1;
-        return prev;
-      }, 0)}
-      <span /> hidden)
+      <span className="counters">
+        showing {list.length - hiddenList.length} results. (
+        <span id="hideTicketsCounter">{hiddenList.length}</span> hidden)
+        <button id="restoreHideTickets" onClick={restoreHandler}>
+          Restore
+        </button>
+      </span>
+
       <input
         id="searchInput"
         type="text"
