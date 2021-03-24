@@ -6,13 +6,14 @@ import starFull from "./icons/star-full.svg";
 
 function Ticket({
   ticket,
+  isNew,
   hideHandler,
   labelClickHandler,
   doneHandler,
   starHandler,
 }) {
   return (
-    <div className="ticket">
+    <div className={`ticket${isNew ? " new" : ""}`}>
       <img
         alt="[X]"
         src={hideIcon}

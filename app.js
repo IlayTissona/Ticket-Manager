@@ -91,10 +91,8 @@ app.patch("/api/tickets/:ticketId/:action", (req, res) => {
 
 app.post("/api/tickets/new", (req, res) => {
   const newTicket = req.body;
-  if (!newTicket.title)
-    return res.status(400).json({ updated: false, message: "No title" });
-  if (!newTicket.content)
-    return res.status(400).json({ updated: false, message: "No Content" });
+  if (!newTicket.title) return res.status(400).send("No title");
+  if (!newTicket.content) return res.status(400).send("No Content");
   if (!newTicket.userEmail) newTicket.userEmail = "Anonymus@whoknows.com";
   newTicket.creationTime = new Date();
 

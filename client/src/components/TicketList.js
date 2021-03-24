@@ -181,6 +181,7 @@ function TicketList({ filters }) {
         {filterViewList(list).map((ticketObj) => {
           return (
             <Ticket
+              isNew={filters.newId && ticketObj.id === filters.newId}
               ticket={ticketObj}
               hideHandler={hideTicket}
               doneHandler={doneTicket}
