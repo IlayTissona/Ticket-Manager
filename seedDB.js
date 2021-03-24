@@ -10,6 +10,11 @@ const ticketSchema = new mongoose.Schema({
   done: Boolean,
   creationTime: { type: Date, required: true },
   labels: [String],
+  id: String,
+  starred: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 ticketSchema.set("toJSON", {

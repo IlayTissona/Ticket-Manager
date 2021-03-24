@@ -79,7 +79,7 @@ function TicketList({ filters }) {
     const ticketToChange = list.find((ticket) => ticket.id === ticketId);
     axios
       .patch(
-        `/api/tickets/${ticketId}/${ticketToChange.done ? "/undone" : "/done"}`
+        `/api/tickets/${ticketId}/${ticketToChange.done ? "undone" : "done"}`
       )
       .then((patchRes) => {
         if (patchRes.data.updated) {

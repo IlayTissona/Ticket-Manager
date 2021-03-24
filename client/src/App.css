@@ -168,17 +168,31 @@
 }
 
 .hideTicketButton {
-  display: absolute;
-  width: 2.5%;
-  height: 2.5%;
+  position: absolute;
+  height: 10%;
   top: 1%;
   left: 1%;
-  height: 20%;
   border-radius: 12.5%;
   border: none;
   text-align: center;
   z-index: 5;
   cursor: pointer;
+}
+
+.markAsDone {
+  position: absolute;
+  height: 10%;
+  top: 1%;
+  right: 1%;
+  border-radius: 12.5%;
+  border: none;
+  text-align: center;
+  z-index: 5;
+  cursor: pointer;
+}
+.done {
+  background-color: greenyellow;
+  fill: green;
 }
 
 .ticket-metadata {

@@ -9,13 +9,13 @@ function Ticket({ ticket, hideHandler, labelClickHandler, doneHandler }) {
         alt="[X]"
         src={hideIcon}
         className="hideTicketButton"
-        onClick={() => doneHandler(ticket.id)}
+        onClick={() => hideHandler(ticket.id)}
       />
       <img
-        alt="[X]"
+        alt="[V]"
         src={doneIcon}
-        className="markAsDone"
-        onClick={() => hideHandler(ticket.id)}
+        className={`markAsDone${ticket.done ? " done" : ""}`}
+        onClick={() => doneHandler(ticket.id)}
       />
       <h4 className="ticket-title">{ticket.title}</h4>
       <div className="ticket-content">{ticket.content}</div>
