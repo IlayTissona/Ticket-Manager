@@ -92,12 +92,11 @@
   top: 20%;
   left: 0;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   height: 80%;
   width: 70%;
   overflow-y: scroll;
   overflow-x: hidden;
-  list-style: none;
 }
 
 #side-menu {
@@ -163,11 +162,14 @@
   margin: 1%;
   min-height: 30%;
   /* max-height: 30%; */
-  /* display: flex;
-  flex-direction: column; */
 }
 .new {
   background-color: yellowgreen;
+}
+
+.expanded {
+  min-height: 60%;
+  flex-grow: 3;
 }
 
 .ticket-title {
@@ -181,6 +183,9 @@
   left: 5%;
   margin: 0;
 }
+.expanded .ticket-title {
+  height: 20%;
+}
 
 .ticket-content {
   position: absolute;
@@ -188,7 +193,13 @@
   width: 100%;
   text-align: left;
   top: 40%;
+  overflow-y: hidden;
+}
+.expanded .ticket-content {
   overflow-y: scroll;
+  height: 75%;
+  top: 20%;
+  /* flex-grow: 3; */
 }
 .ticket-content::-webkit-scrollbar {
   display: none;
@@ -196,8 +207,8 @@
 
 .hideTicketButton {
   position: absolute;
-  height: 10%;
-  top: 1%;
+  width: 3%;
+  top: 0;
   left: 1%;
   border-radius: 12.5%;
   border: none;
@@ -207,10 +218,20 @@
 }
 .star-button {
   position: absolute;
-  height: 10%;
-  top: 1%;
+  width: 3%;
+  top: 0;
   right: 6%;
   border-radius: 12.5%;
+  border: none;
+  text-align: center;
+  z-index: 5;
+  cursor: pointer;
+}
+.expand-button {
+  position: absolute;
+  bottom: 0;
+  right: 48%;
+  border-radius: 100%;
   border: none;
   text-align: center;
   z-index: 5;
@@ -219,8 +240,8 @@
 
 .markAsDone {
   position: absolute;
-  height: 10%;
-  top: 1%;
+  width: 3%;
+  top: 0;
   right: 1%;
   border-radius: 12.5%;
   border: none;
@@ -242,6 +263,9 @@
   justify-content: space-between;
   font-size: 1vh;
   width: 100%;
+}
+.expanded .ticket-metadata {
+  height: 5%;
 }
 
 .creation-date {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import hideIcon from "./icons/hide-icon.svg";
 import doneIcon from "./icons/done-icon.svg";
 import starEmpty from "./icons/star-empty.svg";
@@ -12,8 +12,11 @@ function Ticket({
   doneHandler,
   starHandler,
 }) {
+  const [expanded, setExpanded] = useState(false);
   return (
-    <div className={`ticket${isNew ? " new" : ""}`}>
+    <div
+      className={`ticket${isNew ? " new" : ""}${expanded ? " expanded" : ""}`}
+    >
       <img
         alt="[X]"
         src={hideIcon}
@@ -52,6 +55,9 @@ function Ticket({
           ))}
         </div>
       </div>
+      <button className="expand-button" onClick={() => setExpanded(!expanded)}>
+        {expanded ? "△" : "▽"}
+      </button>
     </div>
   );
 }
