@@ -33,12 +33,14 @@ function TicketList(props) {
   }, []);
 
   const filterLabel = (labelName) => {
+    console.log("FILTERED" + labelName);
     if (shownLabels.includes(labelName)) return;
     const newLabelList = shownLabels.concat([labelName]);
     setLabels(newLabelList);
   };
 
   const unFilterLabel = (labelName) => {
+    console.log("UNFILTERED" + labelName);
     if (!shownLabels.includes(labelName)) return;
     const newLabelList = shownLabels.filter((label) => label !== labelName);
     setLabels(newLabelList);
@@ -56,7 +58,7 @@ function TicketList(props) {
       <LabelsFilterBar
         filtered={shownLabels}
         labelClickHandler={filterLabel}
-        unfilterHandler={unFilterLabel}
+        unFilterHandler={unFilterLabel}
       />
       <div className="ticket-list">
         {list

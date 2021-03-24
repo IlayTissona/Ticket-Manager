@@ -30,6 +30,22 @@ app.get("/api/tickets", (req, res) => {
   }
 });
 
+app.get("/api/tickets/allLabels", (req, res) => {
+  Ticket.find({})
+    .then((allTickets) => {
+      const allLabels = [];
+      allTickets.forEach((ticket) => {
+        ticket.labels.forEach((label) => {
+          if (!allLabels.includes(label)) {
+            allLabels.push(label);
+          }
+        });
+      });
+      res.json(allLabels);
+    })
+    .catch(() => res.status(500).send("Internal Server Error"));
+});
+
 app.patch("/api/tickets/:ticketId/:action", (req, res) => {
   const { ticketId } = req.params;
   if (!ticketId)
