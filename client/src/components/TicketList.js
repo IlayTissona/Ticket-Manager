@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SearchArea from "./SearchArea";
 import Ticket from "./Ticket";
+import LabelsFilterBar from "./LabelsFilterBar";
 
 function TicketList(props) {
   const [list, setList] = useState([]);
   const [hiddenTickets, setHidden] = useState([]);
+  const [shownLabels, setLabels] = useState([]);
 
   const search = (value) => {
     axios
@@ -30,6 +32,18 @@ function TicketList(props) {
     });
   }, []);
 
+  const filterLabel = (labelName) => {
+    if (shownLabels.includes(labelName)) return;
+    const newLabelList = shownLabels.concat([labelName]);
+    setLabels(newLabelList);
+  };
+
+  const unFilterLabel = (labelName) => {
+    if (!shownLabels.includes(labelName)) return;
+    const newLabelList = shownLabels.filter((label) => label !== labelName);
+    setLabels(newLabelList);
+  };
+
   return (
     <>
       <h1 id="page-title">Ticket Manager</h1>
@@ -39,13 +53,32 @@ function TicketList(props) {
         list={list}
         hiddenList={hiddenTickets}
       />
-      <ul className="ticket-list">
+      <LabelsFilterBar
+        filtered={shownLabels}
+        labelClickHandler={filterLabel}
+        unfilterHandler={unFilterLabel}
+      />
+      <div className="ticket-list">
         {list
           .filter((ticket) => !hiddenTickets.includes(ticket.id))
+          .filter((ticket) => {
+            return !shownLabels.length ? true : ticket.labels;
+          })
+          .filter((ticket) => {
+            return ticket.labels.some(
+              (label) => shownLabels.includes(label) || !shownLabels.length
+            );
+          })
           .map((ticketObj) => {
-            return <Ticket ticket={ticketObj} hideHandler={hideTicket} />;
+            return (
+              <Ticket
+                ticket={ticketObj}
+                hideHandler={hideTicket}
+                labelClickHandler={filterLabel}
+              />
+            );
           })}
-      </ul>
+      </div>
     </>
   );
 }

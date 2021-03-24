@@ -11,7 +11,7 @@ const Footer = () => {
         rel="noreferrer"
       >
         <img
-          class="contact-logo"
+          className="contact-logo"
           id="facebook-link"
           src="../../public/facebook.png"
           alt="FaceBook"
@@ -19,7 +19,7 @@ const Footer = () => {
       </a>
       <a href="https://github.com/IlayTissona" target="_blank" rel="noreferrer">
         <img
-          class="contact-logo"
+          className="contact-logo"
           id="github-link"
           src="../../public/github.png"
           alt="gitHub"
@@ -27,7 +27,7 @@ const Footer = () => {
       </a>
       <a href="mailto:ilay211@gmail.com" target="_blank" rel="noreferrer">
         <img
-          class="contact-logo"
+          className="contact-logo"
           id="mail-link"
           src="../../public/email.png"
           alt="mail"
@@ -39,7 +39,7 @@ const Footer = () => {
         rel="noreferrer"
       >
         <img
-          class="contact-logo"
+          className="contact-logo"
           id="whatsapp-link"
           src="../../public/whatsapp.png"
           alt="whatsapp"
