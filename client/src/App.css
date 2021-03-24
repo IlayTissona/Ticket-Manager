@@ -1,4 +1,7 @@
 /* ---------------------------------------APP--------------------------------------------------- */
+* {
+  font-size: 2vh;
+}
 .App {
   height: 100vh;
   width: 100vw;
@@ -42,18 +45,40 @@
 }
 
 .filtered-labels {
-  width: 50%;
-  overflow-x: scroll;
-}
-
-.option-labels {
+  position: absolute;
+  width: 40%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  width: 50%;
   overflow-x: scroll;
+  overflow-y: hidden;
+  right: 50%;
 }
 
+.option-labels {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 35%;
+  height: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  right: 0;
+}
+
+#labels-title {
+  position: absolute;
+  width: 15%;
+  left: 50%;
+}
+
+#show-only-title {
+  position: absolute;
+  width: 10%;
+  left: 0%;
+}
 .ticket-list {
   position: absolute;
   padding: 0;
@@ -61,7 +86,7 @@
   left: 0;
   display: flex;
   flex-direction: column;
-  height: 70%;
+  height: 80%;
   width: 70%;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -71,16 +96,36 @@
 #footer {
   position: absolute;
   bottom: 0;
-  height: 10%;
+  height: 7%;
+  width: 30%;
+  right: 0;
+}
+
+#contact-title {
+  height: 2%;
+  position: absolute;
+  top: 0;
   width: 100%;
+  text-align: center;
+}
+
+#contact-links {
+  width: 100%;
+  position: absolute;
+  bottom: 2%;
   display: flex;
   justify-content: space-around;
-  font-size: 4vh;
+}
+
+.contact-logo {
+  height: 3vh;
+  width: 3vh;
 }
 
 /* ---------------------------------------TICKET--------------------------------------------------- */
 
 .ticket {
+  position: relative;
   border: 1px solid grey;
   border-radius: 1.25%;
   margin: 1%;
@@ -91,43 +136,48 @@
 }
 
 .ticket-title {
-  display: inline-block;
-  height: 20%;
-  width: 80%;
+  position: absolute;
+  height: 40%;
+  max-height: 20%;
+  z-index: 4;
+  width: 90%;
   text-align: center;
   top: 0;
+  left: 5%;
   margin: 0;
 }
 
 .ticket-content {
-  height: 60%;
+  position: absolute;
+  height: 40%;
   width: 100%;
   text-align: left;
-  top: 20%;
+  top: 40%;
   overflow-y: scroll;
 }
 
 .hideTicketButton {
-  display: inline-block;
-  width: 5%;
-  height: 10%;
+  display: absolute;
+  width: 2.5%;
+  height: 2.5%;
   top: 1%;
   left: 1%;
   height: 20%;
-  background-color: lightgreen;
   border-radius: 12.5%;
   border: none;
-  font-size: 100%;
   text-align: center;
+  z-index: 5;
+  cursor: pointer;
 }
 
 .ticket-metadata {
-  position: relative;
-  height: 20%;
+  position: absolute;
+  height: 10%;
   bottom: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-size: 1vh;
   width: 100%;
 }
 
@@ -135,20 +185,25 @@
   display: inline;
   margin: 0;
   height: 10%;
-  width: 25%;
+  width: 30%;
+  font-size: 1vh;
 }
 .user-Email {
   display: inline;
   margin: 0;
   height: 10%;
-  width: 25%;
+  width: 30%;
+  font-size: 1vh;
 }
 .labels {
   display: inline;
   margin: 0;
-  width: 50%;
+  width: 40%;
   display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
 }
 .label {
   margin-right: 1%;
+  font-size: 1vh;
 }

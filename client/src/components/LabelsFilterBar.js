@@ -7,14 +7,13 @@ function LabelsFilterBar({ filtered, labelClickHandler, unFilterHandler }) {
   useEffect(() => {
     axios.get("/api/tickets/allLabels").then((labels) => {
       setExistingLabels(labels.data);
-      console.log(labels);
     });
   }, []);
 
   return (
     <div className="labels-filter-bar">
+      <span id="show-only-title">{"Show Only : "}</span>
       <div className="filtered-labels">
-        {"Show Only : "}
         {filtered.map((label) => {
           return (
             <button className="label" onClick={() => unFilterHandler(label)}>
@@ -23,6 +22,7 @@ function LabelsFilterBar({ filtered, labelClickHandler, unFilterHandler }) {
           );
         })}
       </div>
+      <span id="labels-title">{"Labels : "}</span>
       <div className="option-labels">
         {existingLabels
           .filter((label) => !filtered.includes(label))

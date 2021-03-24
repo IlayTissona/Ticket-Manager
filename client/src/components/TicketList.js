@@ -9,6 +9,20 @@ function TicketList(props) {
   const [hiddenTickets, setHidden] = useState([]);
   const [shownLabels, setLabels] = useState([]);
 
+  const filterViewList = (ticketList) => {
+    return ticketList
+      .filter((ticket) => !hiddenTickets.includes(ticket.id))
+      .filter((ticket) => {
+        return !shownLabels.length ? true : ticket.labels;
+      })
+      .filter((ticket) => {
+        if (!shownLabels.length) {
+          return true;
+        }
+        return ticket.labels.some((label) => shownLabels.includes(label));
+      });
+  };
+
   const search = (value) => {
     axios
       .get(`/api/tickets${value !== "" ? "?searchText=" + value : ""}`)
@@ -33,14 +47,12 @@ function TicketList(props) {
   }, []);
 
   const filterLabel = (labelName) => {
-    console.log("FILTERED" + labelName);
     if (shownLabels.includes(labelName)) return;
     const newLabelList = shownLabels.concat([labelName]);
     setLabels(newLabelList);
   };
 
   const unFilterLabel = (labelName) => {
-    console.log("UNFILTERED" + labelName);
     if (!shownLabels.includes(labelName)) return;
     const newLabelList = shownLabels.filter((label) => label !== labelName);
     setLabels(newLabelList);
@@ -61,25 +73,15 @@ function TicketList(props) {
         unFilterHandler={unFilterLabel}
       />
       <div className="ticket-list">
-        {list
-          .filter((ticket) => !hiddenTickets.includes(ticket.id))
-          .filter((ticket) => {
-            return !shownLabels.length ? true : ticket.labels;
-          })
-          .filter((ticket) => {
-            return ticket.labels.some(
-              (label) => shownLabels.includes(label) || !shownLabels.length
-            );
-          })
-          .map((ticketObj) => {
-            return (
-              <Ticket
-                ticket={ticketObj}
-                hideHandler={hideTicket}
-                labelClickHandler={filterLabel}
-              />
-            );
-          })}
+        {filterViewList(list).map((ticketObj) => {
+          return (
+            <Ticket
+              ticket={ticketObj}
+              hideHandler={hideTicket}
+              labelClickHandler={filterLabel}
+            />
+          );
+        })}
       </div>
     </>
   );

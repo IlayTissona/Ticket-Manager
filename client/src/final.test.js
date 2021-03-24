@@ -44,7 +44,7 @@ describe(projectName, () => {
   beforeAll(async () => {
     browser = await puppeteer.launch({
       headless: false,
-      // slowMo: 100,
+      slowMo: 100,
     });
     page = await browser.newPage();
     page.on("console", (message) =>

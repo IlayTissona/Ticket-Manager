@@ -1,11 +1,15 @@
 import React from "react";
+import hideIcon from "./icons/hide-icon.svg";
 
 function Ticket({ ticket, hideHandler, labelClickHandler }) {
   return (
     <div className="ticket">
-      <span className="hideTicketButton" onClick={() => hideHandler(ticket.id)}>
-        [X]
-      </span>
+      <img
+        alt="[X]"
+        src={hideIcon}
+        className="hideTicketButton"
+        onClick={() => hideHandler(ticket.id)}
+      />
       <h4 className="ticket-title">{ticket.title}</h4>
       <div className="ticket-content">{ticket.content}</div>
       <div className="ticket-metadata">

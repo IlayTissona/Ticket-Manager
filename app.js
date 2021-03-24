@@ -3,11 +3,11 @@ const app = express();
 const Ticket = require("./seedDB");
 const cors = require("cors");
 
-app.use(express.static("client/build"));
+app.use(express.static(process.cwd() + "/client/build/"));
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.sendFile(process.cwd() + "client/build/index.html");
+  res.sendFile(process.cwd() + "/client/build/index.html");
 });
 
 app.get("/api/tickets", (req, res) => {
