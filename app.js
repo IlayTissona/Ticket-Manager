@@ -5,6 +5,7 @@ const cors = require("cors");
 
 app.use(express.static(process.cwd() + "/client/build/"));
 app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.sendFile(process.cwd() + "/client/build/index.html");
@@ -55,16 +56,6 @@ app.patch("/api/tickets/:ticketId/:action", (req, res) => {
   const { action } = req.params;
   if (!action)
     return res.status(300).json({ updated: false, message: "No action" });
-  // if (
-  //   action !== "done" &&
-  //   action !== "undone" &&
-  //   action !== "star" &&
-  //   action !== "unstar"
-  // ) {
-  //   return res
-  //     .status(400)
-  //     .json({ updated: false, message: "Action not allowed" });
-  // }
   const update = {};
   switch (action) {
     case "done":
@@ -84,7 +75,6 @@ app.patch("/api/tickets/:ticketId/:action", (req, res) => {
         .status(400)
         .json({ updated: false, message: "Action not allowed" });
   }
-  console.log(ticketId, update);
   Ticket.findByIdAndUpdate(ticketId, update, { new: true })
     .then((updatedTicked) => {
       if (!updatedTicked) {
@@ -98,4 +88,25 @@ app.patch("/api/tickets/:ticketId/:action", (req, res) => {
       res.status(404).json({ updated: false, message: "Not Found" });
     });
 });
+
+app.post("/api/tickets/new", (req, res) => {
+  const newTicket = req.body;
+  if (!newTicket.title)
+    return res.status(400).json({ updated: false, message: "No title" });
+  if (!newTicket.content)
+    return res.status(400).json({ updated: false, message: "No Content" });
+  if (!newTicket.userEmail) newTicket.userEmail = "Anonymus@whoknows.com";
+  newTicket.creationTime = new Date();
+
+  const ticket = new Ticket(newTicket);
+  ticket
+    .save()
+    .then((savedTicket) => {
+      res.json({ added: true, saved: savedTicket });
+    })
+    .catch((e) =>
+      res.json({ added: false, massage: "Internal Server Error", error: e })
+    );
+});
+
 module.exports = app;
