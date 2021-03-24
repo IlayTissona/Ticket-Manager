@@ -12,7 +12,7 @@ function LabelsFilterBar({ filtered, labelClickHandler, unFilterHandler }) {
 
   return (
     <div className="labels-filter-bar">
-      <span id="show-only-title">{"Show Only : "}</span>
+      <span id="show-only-title">{"Show: "}</span>
       <div className="filtered-labels">
         {filtered.map((label) => {
           return (
@@ -22,7 +22,7 @@ function LabelsFilterBar({ filtered, labelClickHandler, unFilterHandler }) {
           );
         })}
       </div>
-      <span id="labels-title">{"Labels : "}</span>
+      <span id="labels-title">{"Labels: "}</span>
       <div className="option-labels">
         {existingLabels
           .filter((label) => !filtered.includes(label))

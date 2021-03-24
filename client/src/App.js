@@ -30,8 +30,9 @@ function App() {
 
   return (
     <div className="App">
-      <SideMenu clickHandler={filterView} addHandler={addTicket} />
+      <h1 id="page-title">Ticket Manager</h1>
       <TicketList filters={showFilters} />
+      <SideMenu clickHandler={filterView} addHandler={addTicket} />
       <Footer />
     </div>
   );
