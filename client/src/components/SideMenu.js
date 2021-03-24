@@ -4,6 +4,7 @@ import { useState } from "react";
 
 function SideMenu({ clickHandler, addHandler }) {
   const [formHidden, setFormHidden] = useState(true);
+  const [pickedButton, setPickedButton] = useState("all");
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -35,28 +36,73 @@ function SideMenu({ clickHandler, addHandler }) {
   return (
     <div id="side-menu">
       <div id="side-menu-title">MENU</div>
-      <button className="menu-button" onClick={() => clickHandler()}>
+      <button
+        className={`menu-button${
+          pickedButton === "all" ? " picked-menu-button" : ""
+        }`}
+        onClick={() => {
+          setPickedButton("all");
+          clickHandler();
+        }}
+      >
         All (No Hidden)
       </button>
-      <button className="menu-button" onClick={() => clickHandler("starred")}>
+      <button
+        className={`menu-button${
+          pickedButton === "starred" ? " picked-menu-button" : ""
+        }`}
+        onClick={() => {
+          setPickedButton("starred");
+          clickHandler("starred");
+        }}
+      >
         Starred
       </button>
-      <button className="menu-button" onClick={() => clickHandler("done")}>
+      <button
+        className={`menu-button${
+          pickedButton === "done" ? " picked-menu-button" : ""
+        }`}
+        onClick={() => {
+          setPickedButton("done");
+          clickHandler("done");
+        }}
+      >
         Done
       </button>
-      <button className="menu-button" onClick={() => clickHandler("undone")}>
+      <button
+        className={`menu-button${
+          pickedButton === "undone" ? " picked-menu-button" : ""
+        }`}
+        onClick={() => {
+          setPickedButton("undone");
+          clickHandler("undone");
+        }}
+      >
         Un-Done
       </button>
-      <button className="menu-button" onClick={() => clickHandler("hidden")}>
+      <button
+        className={`menu-button${
+          pickedButton === "hidden" ? " picked-menu-button" : ""
+        }`}
+        onClick={() => {
+          setPickedButton("hidden");
+          clickHandler("hidden");
+        }}
+      >
         Hidden
       </button>
-      <button className="menu-button" onClick={() => setFormHidden(false)}>
-        Add Ticket
+      <button
+        className="menu-button"
+        onClick={() => setFormHidden(!formHidden)}
+      >
+        {formHidden ? "Add Ticket" : "Hide"}
       </button>
-      <form id="add-new-form" hidden={formHidden} onSubmit={handleFormSubmit}>
-        <span className="exitButton" onClick={() => setFormHidden(true)}>
-          X
-        </span>
+      <form
+        id="add-new-form"
+        hidden={formHidden}
+        style={{ display: formHidden ? "none" : "flex" }}
+        onSubmit={handleFormSubmit}
+      >
         <label htmlFor="userEmail">Email : </label>
         <input
           className="newTicketInput"
@@ -79,8 +125,9 @@ function SideMenu({ clickHandler, addHandler }) {
           name="content"
           id="content"
           autoComplete="off"
+          required
         />
-        <label htmlFor="content">Labels : </label>
+        <label htmlFor="labels">Labels : </label>
         <input
           className="labelsInput"
           name="labels"
@@ -89,7 +136,7 @@ function SideMenu({ clickHandler, addHandler }) {
           placeholder="Seperated by commas (label1, label2)"
         />
         <input
-          className="submit-button"
+          className="menu-button"
           name="submit"
           id="submit"
           type="submit"

@@ -98,6 +98,9 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
+.ticket-list::-webkit-scrollbar {
+  display: none;
+}
 
 #side-menu {
   position: absolute;
@@ -108,6 +111,22 @@
   flex-direction: column;
   height: 80%;
   width: 30%;
+}
+
+#add-new-form {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  text-align: center;
+  font-size: large;
+}
+.menu-button {
+  height: 5vh;
+  border-radius: 3%;
+  margin: 1%;
+}
+.picked-menu-button {
+  filter: brightness(50%);
 }
 
 #footer {
