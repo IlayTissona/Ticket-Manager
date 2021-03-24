@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className="App">
-      <SideMenu />
+      <SideMenu clickHandler={filterView} />
       <TicketList filters={showFilters} />
       <Footer />
     </div>

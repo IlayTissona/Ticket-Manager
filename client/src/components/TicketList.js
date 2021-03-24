@@ -4,14 +4,48 @@ import SearchArea from "./SearchArea";
 import Ticket from "./Ticket";
 import LabelsFilterBar from "./LabelsFilterBar";
 
-function TicketList(props) {
+function TicketList({ filters }) {
   const [list, setList] = useState([]);
   const [hiddenTickets, setHidden] = useState([]);
   const [shownLabels, setLabels] = useState([]);
 
   const filterViewList = (ticketList) => {
-    return ticketList
-      .filter((ticket) => !hiddenTickets.includes(ticket.id))
+    let upFilteredTicketList;
+
+    const filterType = Object.entries(filters).find((entry) => entry[1]);
+    if (filterType) {
+      switch (filterType[0]) {
+        case "done": {
+          upFilteredTicketList = ticketList.filter((ticket) => ticket.done);
+          break;
+        }
+        case "undone": {
+          upFilteredTicketList = ticketList.filter((ticket) => !ticket.done);
+          break;
+        }
+        case "starred": {
+          upFilteredTicketList = ticketList.filter((ticket) => !ticket.starred);
+          break;
+        }
+        case "hidden": {
+          upFilteredTicketList = ticketList.filter((ticket) =>
+            hiddenTickets.includes(ticket.id)
+          );
+          break;
+        }
+        default: {
+          upFilteredTicketList = ticketList.filter(
+            (ticket) => !hiddenTickets.includes(ticket.id)
+          );
+        }
+      }
+    } else {
+      upFilteredTicketList = ticketList.filter(
+        (ticket) => !hiddenTickets.includes(ticket.id)
+      );
+    }
+
+    return upFilteredTicketList
       .filter((ticket) => {
         return !shownLabels.length ? true : ticket.labels;
       })
