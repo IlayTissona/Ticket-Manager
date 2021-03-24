@@ -42,6 +42,7 @@
   height: 5%;
   top: 15%;
   display: flex;
+  line-height: 250%;
 }
 
 .filtered-labels {
@@ -55,17 +56,23 @@
   overflow-y: hidden;
   right: 50%;
 }
-
+.filtered-labels::-webkit-scrollbar {
+  display: none;
+}
 .option-labels {
   position: absolute;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   width: 35%;
-  height: 100%;
+  height: 50%;
   overflow-x: scroll;
   overflow-y: hidden;
   right: 0;
+  top: 25%;
+}
+.option-labels::-webkit-scrollbar {
+  display: none;
 }
 
 #labels-title {
@@ -155,7 +162,7 @@
   border-radius: 1.25%;
   margin: 1%;
   min-height: 30%;
-  max-height: 30%;
+  /* max-height: 30%; */
   /* display: flex;
   flex-direction: column; */
 }
@@ -180,12 +187,26 @@
   top: 40%;
   overflow-y: scroll;
 }
+.ticket-content::-webkit-scrollbar {
+  display: none;
+}
 
 .hideTicketButton {
   position: absolute;
   height: 10%;
   top: 1%;
   left: 1%;
+  border-radius: 12.5%;
+  border: none;
+  text-align: center;
+  z-index: 5;
+  cursor: pointer;
+}
+.star-button {
+  position: absolute;
+  height: 10%;
+  top: 1%;
+  right: 6%;
   border-radius: 12.5%;
   border: none;
   text-align: center;
@@ -241,6 +262,9 @@
   display: flex;
   overflow-y: hidden;
   overflow-x: scroll;
+}
+.labels::-webkit-scrollbar {
+  display: none;
 }
 .label {
   margin-right: 1%;

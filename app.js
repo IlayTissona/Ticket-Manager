@@ -55,14 +55,37 @@ app.patch("/api/tickets/:ticketId/:action", (req, res) => {
   const { action } = req.params;
   if (!action)
     return res.status(300).json({ updated: false, message: "No action" });
-  if (action !== "done" && action !== "undone") {
-    return res
-      .status(400)
-      .json({ updated: false, message: "Action not allowed" });
+  // if (
+  //   action !== "done" &&
+  //   action !== "undone" &&
+  //   action !== "star" &&
+  //   action !== "unstar"
+  // ) {
+  //   return res
+  //     .status(400)
+  //     .json({ updated: false, message: "Action not allowed" });
+  // }
+  const update = {};
+  switch (action) {
+    case "done":
+      update.done = true;
+      break;
+    case "undone":
+      update.done = false;
+      break;
+    case "star":
+      update.starred = true;
+      break;
+    case "unstar":
+      update.starred = false;
+      break;
+    default:
+      return res
+        .status(400)
+        .json({ updated: false, message: "Action not allowed" });
   }
-  const isDone = action === "done";
-
-  Ticket.findByIdAndUpdate(ticketId, { done: isDone }, { new: true })
+  console.log(ticketId, update);
+  Ticket.findByIdAndUpdate(ticketId, update, { new: true })
     .then((updatedTicked) => {
       if (!updatedTicked) {
         return res

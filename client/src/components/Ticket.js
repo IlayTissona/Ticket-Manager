@@ -1,8 +1,16 @@
 import React from "react";
 import hideIcon from "./icons/hide-icon.svg";
 import doneIcon from "./icons/done-icon.svg";
+import starEmpty from "./icons/star-empty.svg";
+import starFull from "./icons/star-full.svg";
 
-function Ticket({ ticket, hideHandler, labelClickHandler, doneHandler }) {
+function Ticket({
+  ticket,
+  hideHandler,
+  labelClickHandler,
+  doneHandler,
+  starHandler,
+}) {
   return (
     <div className="ticket">
       <img
@@ -16,6 +24,12 @@ function Ticket({ ticket, hideHandler, labelClickHandler, doneHandler }) {
         src={doneIcon}
         className={`markAsDone${ticket.done ? " done" : ""}`}
         onClick={() => doneHandler(ticket.id)}
+      />
+      <img
+        alt="⁕"
+        src={ticket.starred ? starFull : starEmpty}
+        className="star-button"
+        onClick={() => starHandler(ticket.id)}
       />
       <h4 className="ticket-title">{ticket.title}</h4>
       <div className="ticket-content">{ticket.content}</div>

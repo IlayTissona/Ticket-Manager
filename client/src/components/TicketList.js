@@ -25,15 +25,21 @@ function TicketList({ filters }) {
     if (filterType) {
       switch (filterType[0]) {
         case "done": {
-          upFilteredTicketList = ticketList.filter((ticket) => ticket.done);
+          upFilteredTicketList = ticketList
+            .filter((ticket) => ticket.done)
+            .filter((ticket) => !hiddenTickets.includes(ticket.id));
           break;
         }
         case "undone": {
-          upFilteredTicketList = ticketList.filter((ticket) => !ticket.done);
+          upFilteredTicketList = ticketList
+            .filter((ticket) => !ticket.done)
+            .filter((ticket) => !hiddenTickets.includes(ticket.id));
           break;
         }
         case "starred": {
-          upFilteredTicketList = ticketList.filter((ticket) => !ticket.starred);
+          upFilteredTicketList = ticketList
+            .filter((ticket) => ticket.starred)
+            .filter((ticket) => !hiddenTickets.includes(ticket.id));
           break;
         }
         case "hidden": {
@@ -98,6 +104,29 @@ function TicketList({ filters }) {
           const newList = list.slice();
           setList(newList);
           finishLoading("success");
+        } else {
+          finishLoading(`Error : ${patchRes.data.message}`);
+        }
+      })
+      .catch((e) => {
+        finishLoading(e);
+      });
+  };
+  const starTicket = (ticketId) => {
+    const ticketToChange = list.find((ticket) => ticket.id === ticketId);
+    setLoadState("pending");
+    axios
+      .patch(
+        `/api/tickets/${ticketId}/${ticketToChange.starred ? "unstar" : "star"}`
+      )
+      .then((patchRes) => {
+        if (patchRes.data.updated) {
+          ticketToChange.starred = !ticketToChange.starred;
+          const newList = list.slice();
+          setList(newList);
+          finishLoading("success");
+        } else {
+          finishLoading(`Error : ${patchRes.data.message}`);
         }
       })
       .catch((e) => {
@@ -156,6 +185,7 @@ function TicketList({ filters }) {
               hideHandler={hideTicket}
               doneHandler={doneTicket}
               labelClickHandler={filterLabel}
+              starHandler={starTicket}
             />
           );
         })}
