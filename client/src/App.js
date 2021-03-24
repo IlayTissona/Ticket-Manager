@@ -3,6 +3,7 @@ import TicketList from "./components/TicketList";
 import Footer from "./components/Footer";
 import SideMenu from "./components/SideMenu";
 import { useState } from "react";
+import Loader from "./components/Loader";
 
 const showAll = {
   starred: false,
@@ -13,10 +14,6 @@ const showAll = {
 
 function App() {
   const [showFilters, setFilters] = useState(showAll);
-  const [loadState, setLoadState] = useState(false);
-  const [loadFinished, setLoadFinished] = useState(false);
-
-  const showLoader = () => {};
 
   const filterView = (filterParam) => {
     const newShowState = Object.assign({}, showAll);
@@ -28,7 +25,7 @@ function App() {
     <div className="App">
       <SideMenu clickHandler={filterView} />
       <TicketList filters={showFilters} />
-      <Footer loadState={loadState} loadFinish={loadFinished} />
+      <Footer />
     </div>
   );
 }

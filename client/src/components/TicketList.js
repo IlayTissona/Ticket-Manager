@@ -3,11 +3,20 @@ import React, { useEffect, useState } from "react";
 import SearchArea from "./SearchArea";
 import Ticket from "./Ticket";
 import LabelsFilterBar from "./LabelsFilterBar";
+import Loader from "./Loader";
 
 function TicketList({ filters }) {
   const [list, setList] = useState([]);
   const [hiddenTickets, setHidden] = useState([]);
   const [shownLabels, setLabels] = useState([]);
+  const [loadState, setLoadState] = useState("");
+
+  const finishLoading = (state) => {
+    setLoadState(state);
+    setTimeout(() => {
+      setLoadState(null);
+    }, 1500);
+  };
 
   const filterViewList = (ticketList) => {
     let upFilteredTicketList;
@@ -62,7 +71,8 @@ function TicketList({ filters }) {
       .get(`/api/tickets${value !== "" ? "?searchText=" + value : ""}`)
       .then((res) => {
         setList(res.data);
-      });
+      })
+      .catch((e) => finishLoading("Error: Can't Search"));
   };
 
   const hideTicket = (ticketId) => {
@@ -77,6 +87,7 @@ function TicketList({ filters }) {
 
   const doneTicket = (ticketId) => {
     const ticketToChange = list.find((ticket) => ticket.id === ticketId);
+    setLoadState("pending");
     axios
       .patch(
         `/api/tickets/${ticketId}/${ticketToChange.done ? "undone" : "done"}`
@@ -86,7 +97,11 @@ function TicketList({ filters }) {
           ticketToChange.done = !ticketToChange.done;
           const newList = list.slice();
           setList(newList);
+          finishLoading("success");
         }
+      })
+      .catch((e) => {
+        finishLoading(e);
       });
   };
 
@@ -95,9 +110,16 @@ function TicketList({ filters }) {
   };
 
   useEffect(() => {
-    axios.get("/api/tickets").then((res) => {
-      setList(res.data);
-    });
+    setLoadState("pending");
+    axios
+      .get("/api/tickets")
+      .then((res) => {
+        setList(res.data);
+        finishLoading("success");
+      })
+      .catch((e) => {
+        finishLoading(e);
+      });
   }, []);
 
   const filterLabel = (labelName) => {
@@ -138,6 +160,7 @@ function TicketList({ filters }) {
           );
         })}
       </div>
+      <Loader loadState={loadState} />
     </>
   );
 }
