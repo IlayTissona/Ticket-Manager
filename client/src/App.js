@@ -16,7 +16,7 @@ function App() {
 
   const filterView = (filterParam) => {
     const newShowState = Object.assign({}, showAll);
-    newShowState[filterParam] = true;
+    if (filterParam) newShowState[filterParam] = true;
     setFilters(newShowState);
   };
 

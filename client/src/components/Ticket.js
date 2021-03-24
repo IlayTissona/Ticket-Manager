@@ -1,13 +1,20 @@
 import React from "react";
 import hideIcon from "./icons/hide-icon.svg";
+import doneIcon from "./icons/done-icon.svg";
 
-function Ticket({ ticket, hideHandler, labelClickHandler }) {
+function Ticket({ ticket, hideHandler, labelClickHandler, doneHandler }) {
   return (
     <div className="ticket">
       <img
         alt="[X]"
         src={hideIcon}
         className="hideTicketButton"
+        onClick={() => doneHandler(ticket.id)}
+      />
+      <img
+        alt="[X]"
+        src={doneIcon}
+        className="markAsDone"
         onClick={() => hideHandler(ticket.id)}
       />
       <h4 className="ticket-title">{ticket.title}</h4>

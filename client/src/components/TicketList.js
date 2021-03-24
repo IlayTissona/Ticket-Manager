@@ -66,8 +66,28 @@ function TicketList({ filters }) {
   };
 
   const hideTicket = (ticketId) => {
-    const newHiddenList = hiddenTickets.concat([ticketId]);
+    let newHiddenList;
+    if (hiddenTickets.includes(ticketId)) {
+      newHiddenList = hiddenTickets.filter((id) => id !== ticketId);
+    } else {
+      newHiddenList = hiddenTickets.concat([ticketId]);
+    }
     setHidden(newHiddenList);
+  };
+
+  const doneTicket = (ticketId) => {
+    const ticketToChange = list.find((ticket) => ticket.id === ticketId);
+    axios
+      .patch(
+        `/api/tickets/${ticketId}/${ticketToChange.done ? "/undone" : "/done"}`
+      )
+      .then((patchRes) => {
+        if (patchRes.data.updated) {
+          ticketToChange.done = !ticketToChange.done;
+          const newList = list.slice();
+          setList(newList);
+        }
+      });
   };
 
   const restoreHiddenTickets = () => {
@@ -98,7 +118,7 @@ function TicketList({ filters }) {
       <SearchArea
         changeHandler={search}
         restoreHandler={restoreHiddenTickets}
-        list={list}
+        list={filterViewList(list)}
         hiddenList={hiddenTickets}
       />
       <LabelsFilterBar
@@ -112,6 +132,7 @@ function TicketList({ filters }) {
             <Ticket
               ticket={ticketObj}
               hideHandler={hideTicket}
+              doneHandler={doneTicket}
               labelClickHandler={filterLabel}
             />
           );
