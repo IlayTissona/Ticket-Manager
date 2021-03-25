@@ -11,6 +11,8 @@ This task is said to be an assignment given for Wix job interviews.
 - User can post a new ticket.
 - User can comment on existing tickets.
 
-## Automated Tests
+## Who am I?
 
--
+- Ilay Tissona, 23 years old from Dekel, Southern district, Israel.
+- Full stack Web-Developer
+- Student at Scale-Up velocity Cyber4S
