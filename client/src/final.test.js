@@ -42,10 +42,7 @@ jest.setTimeout(30000);
 const projectName = "1.Ticket Manager UI";
 describe(projectName, () => {
   beforeAll(async () => {
-    browser = await puppeteer.launch({
-      headless: false,
-      slowMo: 200,
-    });
+    browser = await puppeteer.launch();
     page = await browser.newPage();
     page.on("console", (message) =>
       console.log(
