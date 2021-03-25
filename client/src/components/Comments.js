@@ -18,7 +18,12 @@ function Comments({ commentList, show }) {
         })}
       </ul>
       <form className="new-comment-form">
-        <input className="new-comment-text" name="text" type="text" />
+        <input
+          className="new-comment-text"
+          name="text"
+          type="text"
+          placeholder="New Comment..."
+        />
         <input type="submit" value="Send" />
       </form>
     </div>

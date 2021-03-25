@@ -253,7 +253,7 @@ button {
 }
 
 .expanded {
-  min-height: 60%;
+  min-height: 80%;
   flex-grow: 3;
 }
 
@@ -269,7 +269,7 @@ button {
   margin: 0;
 }
 .expanded .ticket-title {
-  height: 20%;
+  height: 15%;
 }
 
 .ticket-content {
@@ -285,8 +285,8 @@ button {
 }
 .expanded .ticket-content {
   overflow-y: scroll;
-  height: 70%;
-  top: 20%;
+  height: 60%;
+  top: 15%;
   /* flex-grow: 3; */
 }
 .ticket-content::-webkit-scrollbar {
@@ -354,7 +354,7 @@ button {
   width: 100%;
 }
 .expanded .ticket-metadata {
-  height: 10%;
+  height: 7%;
 }
 
 .creation-date {
@@ -386,8 +386,49 @@ button {
 .label {
   height: 80%;
   margin-right: 3%;
-  margin-top: 1%;
   border-radius: 15px;
   min-width: fit-content;
   word-wrap: none;
+  cursor: pointer;
+}
+
+.comment-bar {
+  position: absolute;
+  width: 100%;
+  bottom: 7%;
+  height: 18%;
+}
+
+.new-comment-form {
+  position: absolute;
+  width: 100%;
+  height: 30%;
+  bottom: 0;
+}
+
+.comments {
+  position: absolute;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  height: 70%;
+  overflow-y: scroll;
+}
+.comments::-webkit-scrollbar {
+  display: none;
+}
+
+.comment {
+  width: 85%;
+  margin-left: 5%;
+  border: 1px solid rgba(165, 42, 42, 0.363);
+}
+
+.new-comment-text {
+  width: 80%;
+  margin-left: 5%;
+}
+
+.new-comment-button {
+  width: 20%;
 }
