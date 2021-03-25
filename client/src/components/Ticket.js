@@ -12,6 +12,7 @@ function Ticket({
   labelClickHandler,
   doneHandler,
   starHandler,
+  loaderFunctions,
 }) {
   const [expanded, setExpanded] = useState(false);
   return (
@@ -59,7 +60,12 @@ function Ticket({
       <button className="expand-button" onClick={() => setExpanded(!expanded)}>
         {expanded ? "△" : "▽"}
       </button>
-      <Comments commentList={ticket.comments} show={expanded} />
+      <Comments
+        commentList={ticket.comments}
+        show={expanded}
+        loaderFunctions={loaderFunctions}
+        ticketId={ticket.id}
+      />
     </div>
   );
 }

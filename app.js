@@ -111,7 +111,6 @@ app.post("/api/tickets/new-comment/:ticketId", (req, res) => {
   const comment = req.body;
   const { ticketId } = req.params;
   if (!comment.text) return res.status(400).send("No Text");
-  comment.likes = 0;
   comment.creationTime = new Date();
   Ticket.findByIdAndUpdate(
     ticketId,

@@ -17,7 +17,7 @@ const ticketSchema = new mongoose.Schema({
   },
   comments: {
     type: [Object],
-    default: [{ text: "TEST" }],
+    default: [],
   },
 });
 

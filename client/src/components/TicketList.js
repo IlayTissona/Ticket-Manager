@@ -177,6 +177,7 @@ function TicketList({ filters, finishLoading, setLoadState }) {
               doneHandler={doneTicket}
               labelClickHandler={filterLabel}
               starHandler={starTicket}
+              loaderFunctions={{ finishLoading, setLoadState }}
             />
           );
         })}
