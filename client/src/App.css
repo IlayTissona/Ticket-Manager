@@ -8,11 +8,14 @@ body {
   font-family: "Lora", serif;
 }
 input {
-  background-color: #f4a460;
+  background-color: #deb887;
+  border: 1px solid #ffdead;
+  border-radius: 3px;
 }
 button {
   background-color: #bc8f8f;
   font-size: 1rem;
+  border: 1px solid #bc8f8f9f;
 }
 
 .App {
@@ -38,7 +41,7 @@ button {
 }
 
 #searchInput {
-  width: 50%;
+  width: 70%;
   margin: auto;
 }
 
@@ -102,18 +105,27 @@ button {
 .ticket-list {
   position: absolute;
   padding: 0;
-  top: 20%;
+  top: 25%;
   left: 0;
   display: flex;
   flex-direction: column;
-  height: 80%;
-  width: 70%;
+  height: 70%;
+  width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
   background-color: #cd853f;
 }
 .ticket-list::-webkit-scrollbar {
   display: none;
+}
+
+#nav-bar {
+  position: absolute;
+  top: 20%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 5%;
 }
 
 #side-menu {
@@ -130,19 +142,34 @@ button {
   text-align: center;
   margin: 0;
 }
+#hide-form-button {
+  position: fixed;
+  right: 5%;
+  top: 80%;
+  height: 10vh;
+  width: 10vh;
+  border-radius: 100%;
+  background-color: #d2691e;
+}
+#hide-form-img {
+  height: 80%;
+  width: 80%;
+  display: block;
+  margin: auto;
+}
 
-#add-new-form {
+/* #add-new-form {
   display: flex;
   flex-direction: column;
   height: max-content;
   text-align: center;
   font-size: large;
-}
+} */
 .menu-button {
-  height: 5vh;
-  border-radius: 3%;
-  margin: 1%;
+  width: 20%;
+  font-size: small;
   background-color: #d2691e;
+  border: none;
 }
 .picked-menu-button {
   filter: brightness(80%);
@@ -151,21 +178,21 @@ button {
 #footer {
   position: absolute;
   bottom: 0;
-  height: 7%;
-  width: 30%;
+  height: 5%;
+  width: 100%;
   right: 0;
 }
 
 #contact-title {
-  height: 2%;
   position: absolute;
-  top: 0;
-  width: 100%;
-  text-align: center;
+  left: 0;
+  width: 50%;
+  text-align: left;
 }
 
 #contact-links {
-  width: 100%;
+  width: 50%;
+  right: 0;
   position: absolute;
   bottom: 2%;
   display: flex;
@@ -180,10 +207,11 @@ button {
 #loader {
   position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: 5%;
   height: 3%;
-  width: 70%;
+  width: 100%;
   text-align: center;
+  z-index: 15;
 }
 .success {
   background-color: #808000;
@@ -194,6 +222,22 @@ button {
   color: lightpink;
 }
 
+#new-ticket-form {
+  position: fixed;
+  padding-top: 5vh;
+  width: 100%;
+  height: 70%;
+  top: 25%;
+  flex-direction: column;
+  background-color: #f5deb3;
+  z-index: 10;
+}
+
+#hide-form-button {
+  position: fixed;
+  bottom: 0;
+  z-index: 15;
+}
 /* ---------------------------------------TICKET--------------------------------------------------- */
 
 .ticket {
@@ -340,6 +384,10 @@ button {
   display: none;
 }
 .label {
-  height: 100%;
-  margin-right: 1%;
+  height: 80%;
+  margin-right: 3%;
+  margin-top: 1%;
+  border-radius: 15px;
+  min-width: fit-content;
+  word-wrap: none;
 }

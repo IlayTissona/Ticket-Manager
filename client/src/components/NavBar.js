@@ -6,8 +6,8 @@ function NavBar({ clickHandler, addHandler }) {
 
   return (
     <>
-      <div id="side-menu">
-        <h4 id="side-menu-title">MENU</h4>
+      <div id="nav-bar">
+        {/* <h4 id="side-menu-title">MENU</h4> */}
         <button
           className={`menu-button${
             pickedButton === "all" ? " picked-menu-button" : ""
@@ -17,7 +17,7 @@ function NavBar({ clickHandler, addHandler }) {
             clickHandler();
           }}
         >
-          All (No Hidden)
+          All
         </button>
         <button
           className={`menu-button${

@@ -15,6 +15,10 @@ const ticketSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  comments: {
+    type: [Object],
+    default: [{ text: "TEST" }],
+  },
 });
 
 ticketSchema.set("toJSON", {

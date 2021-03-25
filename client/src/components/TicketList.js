@@ -3,20 +3,11 @@ import React, { useEffect, useState } from "react";
 import SearchArea from "./SearchArea";
 import Ticket from "./Ticket";
 import LabelsFilterBar from "./LabelsFilterBar";
-import Loader from "./Loader";
 
-function TicketList({ filters }) {
+function TicketList({ filters, finishLoading, setLoadState }) {
   const [list, setList] = useState([]);
   const [hiddenTickets, setHidden] = useState([]);
   const [shownLabels, setLabels] = useState([]);
-  const [loadState, setLoadState] = useState("");
-
-  const finishLoading = (state) => {
-    setLoadState(state);
-    setTimeout(() => {
-      setLoadState(null);
-    }, 1500);
-  };
 
   const filterViewList = (ticketList) => {
     let upFilteredTicketList;
@@ -190,7 +181,6 @@ function TicketList({ filters }) {
           );
         })}
       </div>
-      <Loader loadState={loadState} />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Comments from "./Comments";
 import hideIcon from "./icons/hide-icon.svg";
 import doneIcon from "./icons/done-icon.svg";
 import starEmpty from "./icons/star-empty.svg";
@@ -58,6 +59,7 @@ function Ticket({
       <button className="expand-button" onClick={() => setExpanded(!expanded)}>
         {expanded ? "△" : "▽"}
       </button>
+      <Comments commentList={ticket.comments} show={expanded} />
     </div>
   );
 }
