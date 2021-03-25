@@ -35,6 +35,15 @@ function Comments({ commentList, show, loaderFunctions, ticketId }) {
             </li>
           );
         })}
+        {commentList.length ? (
+          ""
+        ) : (
+          <li className="comment">
+            <div className="comment-text">
+              {"Be The First to leave a comment..."}
+            </div>
+          </li>
+        )}
       </ul>
       <form className="new-comment-form" onSubmit={handleFormSubmit}>
         <input
