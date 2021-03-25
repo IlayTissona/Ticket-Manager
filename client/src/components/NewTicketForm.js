@@ -76,7 +76,7 @@ function NewTicketForm({ addHandler, setLoadState, finishLoading }) {
         />
         <label htmlFor="labels">Labels : </label>
         <input
-          className="labelsInput"
+          className="newTicketInput"
           name="labels"
           id="labels"
           autoComplete="off"

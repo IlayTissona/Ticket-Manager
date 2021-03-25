@@ -58,7 +58,7 @@ function Ticket({
         </div>
       </div>
       <button className="expand-button" onClick={() => setExpanded(!expanded)}>
-        {expanded ? "△" : "▽"}
+        {expanded ? "▲" : "▼"}
       </button>
       <Comments
         commentList={ticket.comments}

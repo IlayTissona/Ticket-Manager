@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 
 function Comments({ commentList, show, loaderFunctions, ticketId }) {
@@ -26,7 +26,7 @@ function Comments({ commentList, show, loaderFunctions, ticketId }) {
 
   return (
     <div className="comment-bar" hidden={!show}>
-      <span className="comments-counter">{commentList.length} Comments</span>
+      <span className="comments-counter">{commentList?.length} Comments</span>
       <ul className="comments">
         {commentList?.map((comment) => {
           return (
@@ -35,13 +35,11 @@ function Comments({ commentList, show, loaderFunctions, ticketId }) {
             </li>
           );
         })}
-        {commentList.length ? (
+        {commentList?.length ? (
           ""
         ) : (
           <li className="comment">
-            <div className="comment-text">
-              {"Be The First to leave a comment..."}
-            </div>
+            <div className="comment-text first">{"No Comments Yet"}</div>
           </li>
         )}
       </ul>
