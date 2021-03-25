@@ -7,9 +7,13 @@ This task is said to be an assignment given for Wix job interviews.
 ## Featurs & Instructions
 
 - The app loads from mongoDB a list of all tickets.
-- User can filter tickets by searching title name, labels, or done\starred
+- User can filter tickets by searching title name, labels, or done\starred.
 - User can post a new ticket.
 - User can comment on existing tickets.
+
+## See it Live
+
+Hosted by [Heroku](https://www.heroku.com/): https://thawing-fjord-78673.herokuapp.com/
 
 ## Who am I?
 
