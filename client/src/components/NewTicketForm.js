@@ -14,7 +14,9 @@ function NewTicketForm({ addHandler, setLoadState, finishLoading }) {
     const data = { labels: [] };
     for (let [key, value] of formData.entries()) {
       if (key === "labels") {
-        data[key] = data[key].concat(value.replace(", ", ",").split(","));
+        data[key] = data[key]
+          .concat(value.replace(", ", ",").split(","))
+          .filter((label) => label !== "");
         data[key] = data[key].map(
           (label) => label.charAt(0).toUpperCase() + label.substring(1)
         );

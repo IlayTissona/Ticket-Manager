@@ -10,43 +10,62 @@ function TicketList({ filters, finishLoading, setLoadState }) {
   const [shownLabels, setLabels] = useState([]);
 
   const filterViewList = (ticketList) => {
-    let upFilteredTicketList;
+    let upFilteredTicketList = ticketList;
+
+    if (filters["newId"]) {
+      const newTicket = ticketList.find(
+        (ticket) => ticket.id === filters["newId"].id
+      );
+      if (!newTicket) {
+        search(""); // will fetch the new list
+      } else {
+        const listIds = ticketList.map((ticket) => ticket.id);
+        const newTicketObj = upFilteredTicketList.find(
+          (ticket) => ticket.id === newTicket.id
+        );
+        upFilteredTicketList = list.filter(
+          (ticket) =>
+            listIds.includes(ticket.id) && ticket.id !== newTicketObj.id
+        );
+        upFilteredTicketList.unshift(newTicketObj);
+      }
+    }
 
     const filterType = Object.entries(filters).find((entry) => entry[1]);
     if (filterType) {
       switch (filterType[0]) {
         case "done": {
-          upFilteredTicketList = ticketList
+          upFilteredTicketList = upFilteredTicketList
             .filter((ticket) => ticket.done)
             .filter((ticket) => !hiddenTickets.includes(ticket.id));
           break;
         }
         case "undone": {
-          upFilteredTicketList = ticketList
+          upFilteredTicketList = upFilteredTicketList
             .filter((ticket) => !ticket.done)
             .filter((ticket) => !hiddenTickets.includes(ticket.id));
           break;
         }
         case "starred": {
-          upFilteredTicketList = ticketList
+          upFilteredTicketList = upFilteredTicketList
             .filter((ticket) => ticket.starred)
             .filter((ticket) => !hiddenTickets.includes(ticket.id));
           break;
         }
         case "hidden": {
-          upFilteredTicketList = ticketList.filter((ticket) =>
+          upFilteredTicketList = upFilteredTicketList.filter((ticket) =>
             hiddenTickets.includes(ticket.id)
           );
           break;
         }
         default: {
-          upFilteredTicketList = ticketList.filter(
+          upFilteredTicketList = upFilteredTicketList.filter(
             (ticket) => !hiddenTickets.includes(ticket.id)
           );
         }
       }
     } else {
-      upFilteredTicketList = ticketList.filter(
+      upFilteredTicketList = upFilteredTicketList.filter(
         (ticket) => !hiddenTickets.includes(ticket.id)
       );
     }
@@ -171,7 +190,7 @@ function TicketList({ filters, finishLoading, setLoadState }) {
         {filterViewList(list).map((ticketObj) => {
           return (
             <Ticket
-              isNew={filters.newId && ticketObj.id === filters.newId}
+              isNew={filters.newId && ticketObj.id === filters.newId.id}
               ticket={ticketObj}
               hideHandler={hideTicket}
               doneHandler={doneTicket}

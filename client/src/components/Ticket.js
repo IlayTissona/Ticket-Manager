@@ -15,6 +15,10 @@ function Ticket({
   loaderFunctions,
 }) {
   const [expanded, setExpanded] = useState(false);
+
+  // if (isNew) {
+  //   setExpanded(true);
+  // }
   return (
     <div
       className={`ticket${isNew ? " new" : ""}${expanded ? " expanded" : ""}`}

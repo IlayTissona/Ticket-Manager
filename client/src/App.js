@@ -29,12 +29,13 @@ function App() {
     const newShowState = Object.assign({}, showAll);
     if (filterParam) newShowState[filterParam] = true;
     if (filterParam === "newId") newShowState[filterParam] = newId;
+    else newShowState["newId"] = newId;
     setFilters(newShowState);
   };
 
   const addTicket = (data) => {
     if (data.saved) {
-      filterView("newId", data.saved.id);
+      filterView("newId", data.saved);
     }
   };
 
