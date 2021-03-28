@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const Ticket = require("./seedDB");
+const Ticket = require("./ticket-mongo.js");
 const cors = require("cors");
 
 app.use(express.static(process.cwd() + "/client/build/"));
